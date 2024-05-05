@@ -6,15 +6,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{655C910C-FD4E-445F-8CD4-E44F3B80D8A5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>FirstProject.My.MyApplication</StartupObject>
-    <RootNamespace>FirstProject</RootNamespace>
-    <AssemblyName>FirstProject</AssemblyName>
+    <StartupObject>SQLMOSAKA.LOGINPAGE</StartupObject>
+    <RootNamespace>SQLMOSAKA</RootNamespace>
+    <AssemblyName>SQLMOSAKA</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\TSHEP\Downloads\</PublishUrl>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +25,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -37,18 +39,22 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>FirstProject.xml</DocumentationFile>
+    <DocumentationFile>SQLMOSAKA.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <WarningLevel>0</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>FirstProject.xml</DocumentationFile>
+    <OutputPath>..\..\..\..\Downloads\</OutputPath>
+    <DocumentationFile>SQLMOSAKA.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <WarningLevel>0</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -112,17 +118,27 @@
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Excel\Workbook.vb" />
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb" />
+    <Compile Include="loginpage.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="menuL.Designer.vb">
-      <DependentUpon>menuL.vb</DependentUpon>
+    <Compile Include="loginpage.Designer.vb">
+      <DependentUpon>loginpage.vb</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="menuL.vb">
+    <Compile Include="forgortpassword.Designer.vb">
+      <DependentUpon>forgortpassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="forgortpassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenu.Designer.vb">
+      <DependentUpon>MainMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ErrorPage.Designer.vb">
@@ -180,11 +196,17 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="loginpage.resx">
+      <DependentUpon>loginpage.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ErrorPage.resx">
       <DependentUpon>ErrorPage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="menuL.resx">
-      <DependentUpon>menuL.vb</DependentUpon>
+    <EmbeddedResource Include="forgortpassword.resx">
+      <DependentUpon>forgortpassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource1.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>

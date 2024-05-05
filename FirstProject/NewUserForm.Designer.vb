@@ -36,9 +36,11 @@ Partial Class NewUserForm
         '
         'txtnewusername
         '
+        Me.txtnewusername.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtnewusername.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtnewusername.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtnewusername.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.txtnewusername.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtnewusername.ForeColor = System.Drawing.Color.Black
         Me.txtnewusername.Location = New System.Drawing.Point(352, 98)
         Me.txtnewusername.Name = "txtnewusername"
         Me.txtnewusername.Size = New System.Drawing.Size(366, 23)
@@ -48,7 +50,8 @@ Partial Class NewUserForm
         '
         Me.txtNewpassword1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtNewpassword1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtNewpassword1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.txtNewpassword1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNewpassword1.ForeColor = System.Drawing.Color.Black
         Me.txtNewpassword1.Location = New System.Drawing.Point(352, 198)
         Me.txtNewpassword1.Name = "txtNewpassword1"
         Me.txtNewpassword1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -58,9 +61,12 @@ Partial Class NewUserForm
         '
         'txtnewpassword2
         '
+        Me.txtnewpassword2.AcceptsReturn = True
+        Me.txtnewpassword2.AcceptsTab = True
         Me.txtnewpassword2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtnewpassword2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtnewpassword2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.txtnewpassword2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtnewpassword2.ForeColor = System.Drawing.Color.Black
         Me.txtnewpassword2.Location = New System.Drawing.Point(352, 287)
         Me.txtnewpassword2.Name = "txtnewpassword2"
         Me.txtnewpassword2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -129,9 +135,10 @@ Partial Class NewUserForm
         '
         Me.Label3.AutoSize = True
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Label3.Font = New System.Drawing.Font("Arial", 13.8!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(282, 31)
+        Me.Label3.Location = New System.Drawing.Point(281, 32)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(222, 31)
         Me.Label3.TabIndex = 9

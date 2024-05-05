@@ -117,10 +117,325 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="txtNewpassword1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="txtUserName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt</value>
+  </data>
+  <data name="txtUserName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 158</value>
+  </data>
+  <data name="txtUserName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 30</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtUserName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.Name" xml:space="preserve">
+    <value>txtUserName</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="txtPassword.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt</value>
+  </data>
+  <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 233</value>
+  </data>
+  <data name="txtPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 23</value>
+  </data>
+  <data name="txtPassword.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtPassword.Name" xml:space="preserve">
+    <value>txtPassword</value>
+  </data>
+  <data name="&gt;&gt;txtPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtPassword.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtPassword.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="USERNAME.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="USERNAME.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 13.8pt, style=Bold</value>
+  </data>
+  <data name="USERNAME.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 126</value>
+  </data>
+  <data name="USERNAME.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 29</value>
+  </data>
+  <data name="USERNAME.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="USERNAME.Text" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="&gt;&gt;USERNAME.Name" xml:space="preserve">
+    <value>USERNAME</value>
+  </data>
+  <data name="&gt;&gt;USERNAME.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;USERNAME.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;USERNAME.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="PASSWORD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PASSWORD.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 13.8pt, style=Bold</value>
+  </data>
+  <data name="PASSWORD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 201</value>
+  </data>
+  <data name="PASSWORD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 29</value>
+  </data>
+  <data name="PASSWORD.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="PASSWORD.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="&gt;&gt;PASSWORD.Name" xml:space="preserve">
+    <value>PASSWORD</value>
+  </data>
+  <data name="&gt;&gt;PASSWORD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PASSWORD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PASSWORD.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnLogIn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="btnLogIn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.2pt, style=Bold</value>
+  </data>
+  <data name="btnLogIn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 289</value>
+  </data>
+  <data name="btnLogIn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 40</value>
+  </data>
+  <data name="btnLogIn.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnLogIn.Text" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="&gt;&gt;btnLogIn.Name" xml:space="preserve">
+    <value>btnLogIn</value>
+  </data>
+  <data name="&gt;&gt;btnLogIn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLogIn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnLogIn.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="btnEXIT.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="btnEXIT.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.2pt, style=Bold</value>
+  </data>
+  <data name="btnEXIT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 289</value>
+  </data>
+  <data name="btnEXIT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 40</value>
+  </data>
+  <data name="btnEXIT.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="btnEXIT.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="&gt;&gt;btnEXIT.Name" xml:space="preserve">
+    <value>btnEXIT</value>
+  </data>
+  <data name="&gt;&gt;btnEXIT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnEXIT.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnEXIT.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Button1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>714, 490</value>
+  </data>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 26</value>
+  </data>
+  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>New User</value>
+  </data>
+  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
+    <value>Button1</value>
+  </data>
+  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="btnClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>765, 12</value>
+  </data>
+  <data name="btnClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 26</value>
+  </data>
+  <data name="btnClose.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="btnClose.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Name" xml:space="preserve">
+    <value>btnClose</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Button2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        f9vfdV33L967EUgpPoLFAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="Button2.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Button2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 10</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 28</value>
+  </data>
+  <data name="Button2.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="Button2.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
+    <value>Button2</value>
+  </data>
+  <data name="&gt;&gt;Button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnChangePassword.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="btnChangePassword.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="btnChangePassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 262</value>
+  </data>
+  <data name="btnChangePassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 23</value>
+  </data>
+  <data name="btnChangePassword.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="btnChangePassword.Text" xml:space="preserve">
+    <value>Change Password?</value>
+  </data>
+  <data name="&gt;&gt;btnChangePassword.Name" xml:space="preserve">
+    <value>btnChangePassword</value>
+  </data>
+  <data name="&gt;&gt;btnChangePassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnChangePassword.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnChangePassword.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>120, 120</value>
+  </data>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABK4AAASuCAYAAADrmmF/AAAABGdBTUEAALGPC/xhBQAAiYhJREFUeF7s
@@ -714,6 +1029,15 @@
         gg==
 </value>
   </data>
+  <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>822, 528</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 7.8pt, style=Bold</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAAAAAAEAIADuRwAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAEAAAABAAgGAAAAXHKoZgAAAAFv
@@ -1025,5 +1349,17 @@
         TU0BQE1NTQFATU1NAUBNTU0BQE1NAUA/AjU1BQA1NTUFADU1NQUANTU1BQA1NTUFADU1tQK1/w8A24Fx
         KdukLQAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value> LOGIN</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>LOGINPAGE</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

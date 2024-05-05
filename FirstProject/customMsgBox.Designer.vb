@@ -39,10 +39,10 @@ Partial Class customMsgBoxF
         'txtMsgSucess
         '
         Me.txtMsgSucess.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.txtMsgSucess.Location = New System.Drawing.Point(12, 50)
+        Me.txtMsgSucess.Location = New System.Drawing.Point(22, 96)
         Me.txtMsgSucess.Multiline = True
         Me.txtMsgSucess.Name = "txtMsgSucess"
-        Me.txtMsgSucess.Size = New System.Drawing.Size(276, 75)
+        Me.txtMsgSucess.Size = New System.Drawing.Size(408, 178)
         Me.txtMsgSucess.TabIndex = 1
         '
         'customMsgBoxF
@@ -50,7 +50,7 @@ Partial Class customMsgBoxF
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(300, 150)
+        Me.ClientSize = New System.Drawing.Size(473, 321)
         Me.Controls.Add(Me.txtMsgSucess)
         Me.Controls.Add(Me.lblMessage)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
