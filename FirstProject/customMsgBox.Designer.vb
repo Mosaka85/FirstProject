@@ -22,8 +22,11 @@ Partial Class customMsgBoxF
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(customMsgBoxF))
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.txtMsgSucess = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblMessage
@@ -39,18 +42,29 @@ Partial Class customMsgBoxF
         'txtMsgSucess
         '
         Me.txtMsgSucess.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.txtMsgSucess.Location = New System.Drawing.Point(22, 96)
+        Me.txtMsgSucess.Location = New System.Drawing.Point(178, 82)
         Me.txtMsgSucess.Multiline = True
         Me.txtMsgSucess.Name = "txtMsgSucess"
-        Me.txtMsgSucess.Size = New System.Drawing.Size(408, 178)
+        Me.txtMsgSucess.Size = New System.Drawing.Size(478, 204)
         Me.txtMsgSucess.TabIndex = 1
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(-9, 82)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(181, 187)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 2
+        Me.PictureBox1.TabStop = False
         '
         'customMsgBoxF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(473, 321)
+        Me.ClientSize = New System.Drawing.Size(668, 352)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.txtMsgSucess)
         Me.Controls.Add(Me.lblMessage)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -60,6 +74,7 @@ Partial Class customMsgBoxF
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -67,4 +82,5 @@ Partial Class customMsgBoxF
 
     Friend WithEvents lblMessage As System.Windows.Forms.Label
     Friend WithEvents txtMsgSucess As TextBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

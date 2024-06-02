@@ -7,6 +7,20 @@ Imports DataTable = System.Data.DataTable
 Imports Workbook = Microsoft.Office.Interop.Excel.Workbook
 Imports Application = Microsoft.Office.Interop.Excel.Application
 Imports System.Text
+Imports iTextSharp.text
+Imports iTextSharp.text.pdf
+Imports Microsoft.Reporting.WebForms
+Imports System.Drawing.Printing
+Imports Microsoft.Reporting.WinForms
+Imports WinFormsReport = Microsoft.Reporting.WinForms
+Imports WebFormsReport = Microsoft.Reporting.WebForms
+Imports System.Web
+Imports ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode
+Imports Warning = Microsoft.Reporting.WebForms.Warning
+Imports ReportDataSource = Microsoft.Reporting.WebForms.ReportDataSource
+Imports System.Drawing
+Imports Font = System.Drawing.Font
+
 Public Class MainMenu
     Dim configFile As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "settings.xml")
     Dim xmlDoc As New XmlDocument()
@@ -16,8 +30,12 @@ Public Class MainMenu
     Dim dt As String
     Dim tablename As String
     Dim selectedSheet As String
+    Dim RefreshTime As String
+    Private isTimerRunning As Boolean = False
+    Private countdown As Integer
+    Dim refreshActiveIndicator As Integer
     Private Sub menuL_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        xmlDoc.Load(configFile)
+
         btnCreatedatabase.Visible = False
         If LOGINPAGE.txtUserName.Text = "Mosaka" Then
             btnCreatedatabase.Visible = True
@@ -32,16 +50,42 @@ Public Class MainMenu
         btnCreatedabase.Visible = False
         lblCreatedatabase.Visible = False
         btnDataType.Visible = False
-        Dim dataSourceNode As XmlNode = xmlDoc.SelectSingleNode("//appSettings/add[@key='DataSource']")
-        Dim usernameNode As XmlNode = xmlDoc.SelectSingleNode("//appSettings/add[@key='Username']")
-        Dim passwordNode As XmlNode = xmlDoc.SelectSingleNode("//appSettings/add[@key='Password']")
-        Dim databaseNode As XmlNode = xmlDoc.SelectSingleNode("//appSettings/add[@key='InitialCatalog']")
-        Dim dataSource As String = dataSourceNode.Attributes("value").Value
-        Dim username As String = usernameNode.Attributes("value").Value
-        Dim password As String = passwordNode.Attributes("value").Value
-        Dim database As String = databaseNode.Attributes("value").Value
-        txtDabasenameSHOW.Text = database
-        connectionString = $"Data Source={dataSource};Initial Catalog={database};User ID={username};Password={password};"
+        Try
+            xmlDoc.Load(configFile)
+
+            ' Use XmlNamespaceManager to handle default namespaces
+            Dim xmlNsmgr As New XmlNamespaceManager(xmlDoc.NameTable)
+            xmlNsmgr.AddNamespace("default", xmlDoc.DocumentElement.NamespaceURI)
+
+            ' Select nodes with namespace manager
+            Dim dataSourceNode As XmlNode = xmlDoc.SelectSingleNode("//default:appSettings/default:add[@key='DataSource']", xmlNsmgr)
+            Dim usernameNode As XmlNode = xmlDoc.SelectSingleNode("//default:appSettings/default:add[@key='Username']", xmlNsmgr)
+            Dim passwordNode As XmlNode = xmlDoc.SelectSingleNode("//default:appSettings/default:add[@key='Password']", xmlNsmgr)
+            Dim databaseNode As XmlNode = xmlDoc.SelectSingleNode("//default:appSettings/default:add[@key='InitialCatalog']", xmlNsmgr)
+            Dim refreshTimeIntervalNode As XmlNode = xmlDoc.SelectSingleNode("//default:appSettings/default:add[@key='RefreshTime']", xmlNsmgr)
+            Dim refreshActiveTimerNode As XmlNode = xmlDoc.SelectSingleNode("//default:appSettings/default:add[@key='CheckRefeshTimer']", xmlNsmgr)
+
+            ' Check for nulls and assign values
+            refreshActiveIndicator = If(refreshActiveTimerNode IsNot Nothing AndAlso Integer.TryParse(refreshActiveTimerNode.Attributes("value").Value, Nothing), Integer.Parse(refreshActiveTimerNode.Attributes("value").Value), 0) ' Default to 0 if not found
+            RefreshTime = If(refreshTimeIntervalNode IsNot Nothing, Integer.Parse(refreshTimeIntervalNode.Attributes("value").Value), 20) ' Default to 20 seconds if not found
+            Dim dataSource As String = If(dataSourceNode IsNot Nothing, dataSourceNode.Attributes("value").Value, "")
+            Dim username As String = If(usernameNode IsNot Nothing, usernameNode.Attributes("value").Value, "")
+            Dim password As String = If(passwordNode IsNot Nothing, passwordNode.Attributes("value").Value, "")
+            Dim database As String = If(databaseNode IsNot Nothing, databaseNode.Attributes("value").Value, "")
+
+            txtDabasenameSHOW.Text = database
+            connectionString = $"Data Source={dataSource};Initial Catalog={database};User ID={username};Password={password};"
+            lblTimer.Text = $"Time until refresh: {RefreshTime} seconds"
+            ' Start timer only if refreshActiveIndicator is 1
+            If refreshActiveIndicator = "1" Then
+                lblTimer.Visible = True
+            Else
+                lblTimer.Visible = False
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading settings: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FillCombo(ComboTableOrView)
@@ -52,44 +96,71 @@ Public Class MainMenu
         comboBox.Items.Add("Views")
         comboBox.Sorted = True
     End Sub
-    Private Sub btnShowtable_Click(sender As Object, e As EventArgs) Handles btnShowtable.Click
-        Dim numberofrows As String = ""
-        If txtNumberofRow.Text <> "" Then
-            If IsNumeric(txtNumberofRow.Text) Then
-                numberofrows = " TOP " & txtNumberofRow.Text
-            End If
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If countdown > 0 AndAlso refreshActiveIndicator = "1" Then
+            countdown -= 1
+            lblTimer.Text = "Time until refresh: " & countdown & " seconds"
+        Else
+            RefreshData()
+            countdown = RefreshTime ' Reset countdown
         End If
+    End Sub
+    Private Sub btnShowtable_Click(sender As Object, e As EventArgs) Handles btnShowtable.Click
+        If refreshActiveIndicator = "1" Then
+            Timer1.Start()
+            countdown = RefreshTime
+        End If
+
+        Dim numberofrows As String = ""
+        Dim parameterName As String = ""
+        Dim parameterValue As Object = Nothing
+
+        If txtNumberofRow.Text <> "" AndAlso IsNumeric(txtNumberofRow.Text) Then
+            numberofrows = " TOP " & txtNumberofRow.Text
+        End If
+
         Try
             If cmbTables.SelectedItem IsNot Nothing Then
                 Dim selectedTable As String = cmbTables.SelectedItem.ToString()
                 Dim whereClause As String = ""
+
                 If Not String.IsNullOrWhiteSpace(txtWhereConditiontext.Text) AndAlso
-                 cmbFilterColumnsnames.SelectedItem IsNot Nothing AndAlso
-               ComboOperators.SelectedItem IsNot Nothing Then
+           cmbFilterColumnsnames.SelectedItem IsNot Nothing AndAlso
+           ComboOperators.SelectedItem IsNot Nothing Then
+
                     Dim selectedColumn As String = cmbFilterColumnsnames.SelectedItem.ToString()
                     Dim selectedOperator As String = ComboOperators.SelectedItem.ToString()
                     Dim value As String = txtWhereConditiontext.Text
 
-                    If Not IsNumeric(value) Then
-                        value = "'" & value & "'"
-                    End If
+                    ' Use parameterized query to prevent SQL injection
+                    parameterName = $"@{selectedColumn.Replace("[", "").Replace("]", "")}"
+                    parameterValue = If(IsNumeric(value), Convert.ToInt32(value), value)
 
-                    whereClause = $" WHERE [{selectedColumn}] {selectedOperator} {value}"
+                    whereClause = $" WHERE [{selectedColumn}] {selectedOperator} {parameterName}"
                 End If
+
                 Using connection As New SqlConnection(connectionString)
                     connection.Open()
 
-                    Dim query As String = "SELECT " & numberofrows & " * FROM " & selectedTable & " " & whereClause
+                    Dim query As String = $"SELECT {numberofrows} * FROM {selectedTable} {whereClause}"
                     txtShowmecode.Text = query
 
-                    Dim adapter As New SqlDataAdapter(query, connection)
-                    Dim dataSet As New DataSet()
-                    adapter.Fill(dataSet)
-                    If dataSet.Tables(0).Rows.Count = 0 Then
-                        MessageBox.Show("The query returned no results.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Else
-                        DataGridView1.DataSource = dataSet.Tables(0)
-                    End If
+                    Using command As New SqlCommand(query, connection)
+                        ' Add parameters if any
+                        If Not String.IsNullOrWhiteSpace(whereClause) Then
+                            command.Parameters.AddWithValue(parameterName, parameterValue)
+                        End If
+
+                        Dim adapter As New SqlDataAdapter(command)
+                        Dim dataSet As New DataSet()
+                        adapter.Fill(dataSet)
+
+                        If dataSet.Tables(0).Rows.Count = 0 Then
+                            MessageBox.Show("The query returned no results.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Else
+                            DataGridView1.DataSource = dataSet.Tables(0)
+                        End If
+                    End Using
                 End Using
             Else
                 customMsgBoxF.Show()
@@ -104,9 +175,13 @@ Public Class MainMenu
             customMsgBoxF.txtMsgSucess.Text = "An error occurred: " & ex.Message
         End Try
     End Sub
+
+
     Private oExcel As Microsoft.Office.Interop.Excel.Application
     Private oBook As Microsoft.Office.Interop.Excel.Workbook
     Private oSheet As Microsoft.Office.Interop.Excel.Worksheet
+    Private dgvData As Object
+    Private headerFont As System.Drawing.Font
 
     Private Sub BtnExportData_Click(sender As Object, e As EventArgs) Handles btnExportData.Click
         cmbSELECTsheet.Visible = False
@@ -150,7 +225,6 @@ Public Class MainMenu
     Private Sub ComboTableOrView_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboTableOrView.SelectedIndexChanged
         cmbTables.Items.Clear()
         cmbTables.Text = ""
-        txtNumberofRow.Text = ""
         txtWhereConditiontext.Text = ""
         txtWhereConditiontext.Text = ""
         txtSQLtablename.Text = ""
@@ -225,7 +299,6 @@ Public Class MainMenu
     End Sub
 
     Private Sub cmbTables_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTables.SelectedIndexChanged
-        txtNumberofRow.Text = ""
         txtWhereConditiontext.Text = ""
         txtWhereConditiontext.Text = ""
         cmbFilterColumnsnames.Items.Clear()
@@ -241,9 +314,11 @@ Public Class MainMenu
         FillOperatorsCombo(ComboOperators)
     End Sub
     Private Sub btnCreatletable_Click(sender As Object, e As EventArgs) Handles btnCreatletable.Click
+        Timer1.Stop()
         cmbSELECTsheet.Visible = True
         cmbSELECTsheet.Text = ""
         txtSQLtablename.Text = ""
+        lblSELECTWORKSHEET.Visible = True
         Dim openFileDialog1 As New OpenFileDialog()
         openFileDialog1.Filter = "Excel Files|*.xlsx;*.xls"
         openFileDialog1.Title = "Select an Excel File"
@@ -276,51 +351,60 @@ Public Class MainMenu
     End Sub
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
         btnDataType.Visible = True
+        DataGridView1.DataSource = Nothing
         DataGridView1.Rows.Clear()
         DataGridView1.Columns.Clear()
-        If txtSQLtablename.Text = "" Then
-            ErrorPage.Show()
-            ErrorPage.txtErrorMassage.Text = "Please Enter Table name before import"
-            Return
-        End If
-        If cmbSELECTsheet.SelectedItem Is Nothing OrElse String.IsNullOrWhiteSpace(cmbSELECTsheet.SelectedItem.ToString()) Then
-            MessageBox.Show("Please select a sheet before importing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
 
-        Dim selectedSheet As String = cmbSELECTsheet.SelectedItem.ToString()
-        Dim excelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & excelFilePath & ";Extended Properties='Excel 12.0 Xml;HDR=YES;'"
+        Try
+            DataGridView1.DataSource = Nothing
+            btnDataType.Visible = True
+            DataGridView1.Rows.Clear()
+            DataGridView1.Columns.Clear()
+            If txtSQLtablename.Text = "" Then
+                ErrorPage.Show()
+                ErrorPage.txtErrorMassage.Text = "Please Enter Table name before import"
+                Return
+            End If
+            If cmbSELECTsheet.SelectedItem Is Nothing OrElse String.IsNullOrWhiteSpace(cmbSELECTsheet.SelectedItem.ToString()) Then
+                MessageBox.Show("Please select a sheet before importing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
 
-        Using excelConnection As New OleDb.OleDbConnection(excelConnectionString)
-            excelConnection.Open()
-            Dim dt As New DataTable()
-            Dim query As String = "SELECT * FROM [" & selectedSheet & "$]"
-            Using adapter As New OleDbDataAdapter(query, excelConnection)
-                adapter.FillSchema(dt, SchemaType.Source)
+            Dim selectedSheet As String = cmbSELECTsheet.SelectedItem.ToString()
+            Dim excelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & excelFilePath & ";Extended Properties='Excel 12.0 Xml;HDR=YES;'"
+
+            Using excelConnection As New OleDb.OleDbConnection(excelConnectionString)
+                excelConnection.Open()
+                Dim dt As New DataTable()
+                Dim query As String = "SELECT * FROM [" & selectedSheet & "$]"
+                Using adapter As New OleDbDataAdapter(query, excelConnection)
+                    adapter.FillSchema(dt, SchemaType.Source)
+                End Using
+
+                Dim dataTypeForm As New SelectDatatype()
+
+                DataGridView1.Columns.Add("ColumnName", "Column Name")
+                Dim comboBoxColumn As New DataGridViewComboBoxColumn()
+                comboBoxColumn.HeaderText = "Data Type"
+                comboBoxColumn.Name = "DataTypeColumn"
+                comboBoxColumn.Items.AddRange("NVARCHAR(MAX)", "INT", "FLOAT", "BIT", "DATETIME2", "DECIMAL(18,6)")
+                DataGridView1.Columns.Add(comboBoxColumn)
+
+
+                For Each column As DataColumn In dt.Columns
+                    DataGridView1.Rows.Add(column.ColumnName)
+                Next
+
             End Using
-
-            ' Create DataGridView for user to select data types
-            Dim dataTypeForm As New SelectDatatype()
-
-            ' Add columns to DataGridView
-            DataGridView1.Columns.Add("ColumnName", "Column Name")
-            Dim comboBoxColumn As New DataGridViewComboBoxColumn()
-            comboBoxColumn.HeaderText = "Data Type"
-            comboBoxColumn.Name = "DataTypeColumn"
-            comboBoxColumn.Items.AddRange("NVARCHAR(MAX)", "INT", "FLOAT", "BIT", "DATETIME2", "DECIMAL(18,6)")
-            DataGridView1.Columns.Add(comboBoxColumn)
-
-
-            For Each column As DataColumn In dt.Columns
-                DataGridView1.Rows.Add(column.ColumnName)
-            Next
-
-        End Using
-        btnImport.Visible = False
-        txtSQLtablename.Visible = False
-        txtNewSQLTable.Visible = False
-        lblSELECTWORKSHEET.Visible = False
-        cmbSELECTsheet.Visible = False
+            btnImport.Visible = False
+            txtSQLtablename.Visible = False
+            txtNewSQLTable.Visible = False
+            lblSELECTWORKSHEET.Visible = False
+            cmbSELECTsheet.Visible = False
+        Catch ex As Exception
+            ErrorPage.Show()
+            ErrorPage.txtErrorMassage.Text = "Error Importing File: " & ex.Message
+        End Try
     End Sub
     Private Sub cmbSELECTsheet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSELECTsheet.SelectedIndexChanged
         btnImport.Visible = True
@@ -343,6 +427,7 @@ Public Class MainMenu
     Private Sub btnLogOut_Click(sender As Object, e As EventArgs) Handles btnLogOut.Click
         Me.Hide()
         LOGINPAGE.Show()
+        Timer1.Stop()
     End Sub
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Hide()
@@ -619,4 +704,181 @@ Public Class MainMenu
             Return Convert.ToInt32(command.ExecuteScalar()) > 0
         End Using
     End Function
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+
+
+    Private Sub RefreshData()
+        Dim numberofrows As String = ""
+        If Not String.IsNullOrWhiteSpace(txtNumberofRow.Text) Then
+            numberofrows = " TOP " & txtNumberofRow.Text
+        End If
+        Try
+            If cmbTables.SelectedItem IsNot Nothing Then
+                Dim selectedTable As String = cmbTables.SelectedItem.ToString()
+                Dim whereClause As String = ""
+                If txtWhereConditiontext.Text.Trim() = "" Then
+                    whereClause = ""
+                ElseIf cmbFilterColumnsnames.SelectedItem IsNot Nothing AndAlso ComboOperators.SelectedItem IsNot Nothing Then
+                    Dim selectedColumn As String = cmbFilterColumnsnames.SelectedItem.ToString()
+                    Dim selectedOperator As String = ComboOperators.SelectedItem.ToString()
+                    Dim value As String = txtWhereConditiontext.Text
+                    If Not IsNumeric(value) Then
+                        value = "'" & value & "'"
+                    End If
+                    whereClause = $" WHERE {selectedColumn} {selectedOperator} {value}"
+                End If
+                Using connection As New SqlConnection(connectionString)
+                    connection.Open()
+                    Dim query As String = "SELECT " & numberofrows & " * FROM " & selectedTable & whereClause
+                    txtShowmecode.Text = query
+                    Dim adapter As New SqlDataAdapter(query, connection)
+                    Dim dataSet As New DataSet()
+                    adapter.Fill(dataSet)
+                    DataGridView1.DataSource = dataSet.Tables(0)
+                End Using
+            Else
+                ErrorPage.Show()
+                customMsgBoxF.txtMsgSucess.Text = "Please select a table first."
+            End If
+        Catch ex As Exception
+            customMsgBoxF.Show()
+            customMsgBoxF.txtMsgSucess.Text = ex.Message
+        End Try
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnCustumCodeSQL.Click
+        If refreshActiveIndicator = "1" Then
+            Timer1.Start()
+            countdown = RefreshTime
+        End If
+
+        Dim numberofrows As String = ""
+        Dim parameterName As String = ""
+        Dim parameterValue As Object = Nothing
+
+        Try
+
+
+            Using connection As New SqlConnection(connectionString)
+                connection.Open()
+
+                Dim query As String = txtShowmecode.Text
+
+
+                Using command As New SqlCommand(query, connection)
+
+
+                    Dim adapter As New SqlDataAdapter(command)
+                    Dim dataSet As New DataSet()
+                    adapter.Fill(dataSet)
+
+                    If dataSet.Tables(0).Rows.Count = 0 Then
+                        MessageBox.Show("The query returned no results.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Else
+                        DataGridView1.DataSource = dataSet.Tables(0)
+                    End If
+                End Using
+            End Using
+
+        Catch ex As SqlException
+            customMsgBoxF.Show()
+            customMsgBoxF.txtMsgSucess.Text = "Database Error: " & ex.Message
+        Catch ex As Exception
+            customMsgBoxF.Show()
+            customMsgBoxF.txtMsgSucess.Text = "An error occurred: " & ex.Message
+        End Try
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Try
+            ' Create PrintDocument and set landscape orientation
+            Dim printDocument As New PrintDocument()
+            printDocument.DefaultPageSettings.Landscape = True
+
+            ' Initialize fonts
+            Dim basicFont As New Font("Arial", 10)
+            Dim headerFont As New Font("Arial", 12, FontStyle.Bold)
+
+            ' Calculate fixed column widths based on header text (avoid wrapping headers)
+            Dim columnWidths As New List(Of Integer)
+            For Each column As DataGridViewColumn In DataGridView1.Columns
+                Dim headerWidth As Integer = CInt(ePrint.Graphics.MeasureString(column.HeaderText, headerFont).Width) + 10 ' Add padding
+                columnWidths.Add(headerWidth)
+            Next
+
+            ' Adjust column widths based on cell content
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                If Not row.IsNewRow Then
+                    For i As Integer = 0 To DataGridView1.Columns.Count - 1
+                        Dim cellValue As String = If(row.Cells(i).Value IsNot Nothing, row.Cells(i).Value.ToString(), "")
+                        Dim cellWidth As Integer = CInt(ePrint.Graphics.MeasureString(cellValue, basicFont).Width) + 10 ' Add padding
+                        If cellWidth > columnWidths(i) Then
+                            columnWidths(i) = cellWidth
+                        End If
+                    Next
+                End If
+            Next
+
+            ' Set the print document handler
+            AddHandler printDocument.PrintPage, Sub(senderPrint As Object, ePrint As PrintPageEventArgs)
+                                                    Dim yPos As Integer = 50        ' Start printing below the top margin
+                                                    Dim startX As Integer = 50       ' Start printing from the left margin
+                                                    Dim cellPadding As Integer = 5
+                                                    Dim rowsPerPage As Integer = CalculateRowsPerPage(ePrint, basicFont)
+
+                                                    ' Print the header
+                                                    For i As Integer = 0 To DataGridView1.Columns.Count - 1
+                                                        Dim alignment As StringFormat = New StringFormat()
+                                                        alignment.Alignment = If(DataGridView1.Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight, StringAlignment.Far, StringAlignment.Near)
+                                                        ePrint.Graphics.DrawString(DataGridView1.Columns(i).HeaderText, headerFont, Brushes.Black, New RectangleF(startX, yPos, columnWidths(i), headerFont.Height), alignment)
+                                                        startX += columnWidths(i) + cellPadding
+                                                    Next
+                                                    yPos += headerFont.Height + cellPadding
+
+
+                                                    ' Print each row
+                                                    Dim rowIndex As Integer = 0
+                                                    While rowIndex < DataGridView1.Rows.Count AndAlso rowIndex < rowsPerPage
+                                                        startX = 50  ' Reset for each row
+                                                        Dim row As DataGridViewRow = DataGridView1.Rows(rowIndex)
+                                                        If Not row.IsNewRow Then
+                                                            For i As Integer = 0 To DataGridView1.Columns.Count - 1
+                                                                Dim cellValue As String = If(row.Cells(i).Value IsNot Nothing, row.Cells(i).Value.ToString(), "")
+
+                                                                Dim alignment As StringFormat = New StringFormat()
+                                                                alignment.Alignment = If(DataGridView1.Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight, StringAlignment.Far, StringAlignment.Near)
+                                                                ePrint.Graphics.DrawString(cellValue, basicFont, Brushes.Black, New RectangleF(startX, yPos, columnWidths(i), basicFont.Height), alignment)
+                                                                startX += columnWidths(i) + cellPadding
+                                                            Next
+                                                            yPos += basicFont.Height + cellPadding
+                                                        End If
+                                                        rowIndex += 1
+
+                                                        ' Check for page break
+                                                        If yPos + basicFont.Height > ePrint.MarginBounds.Bottom Then
+                                                            ePrint.HasMorePages = True
+                                                            Exit Sub
+                                                        End If
+                                                    End While
+                                                End Sub
+
+            ' ... (Rest of the code for PrintPreviewDialog) ...
+        Catch ex As Exception
+            MessageBox.Show("An error occurred while printing: " & ex.Message, "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+
+    ' Helper Function: Calculate rows per page
+    Private Function CalculateRowsPerPage(e As PrintPageEventArgs, font As Font) As Integer
+        Return CInt(e.MarginBounds.Height / (font.Height + 5)) ' 5 is for padding
+    End Function
+
+
+
+
 End Class

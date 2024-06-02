@@ -40,40 +40,44 @@ Partial Class Settings
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.btnUsersTable = New System.Windows.Forms.Button()
+        Me.txtRefreshtimer = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.CheckRefeshTimer = New System.Windows.Forms.CheckBox()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ComboBox1
         '
-        Me.ComboBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ComboBox1.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.ComboBox1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox1.Font = New System.Drawing.Font("Arial", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.ForeColor = System.Drawing.Color.Black
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(459, 298)
+        Me.ComboBox1.Location = New System.Drawing.Point(447, 299)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(278, 24)
         Me.ComboBox1.TabIndex = 0
         '
         'txtPassword
         '
-        Me.txtPassword.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.txtPassword.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Font = New System.Drawing.Font("Arial", 13.8!)
         Me.txtPassword.ForeColor = System.Drawing.Color.Black
         Me.txtPassword.Location = New System.Drawing.Point(410, 197)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(8226)
-        Me.txtPassword.Size = New System.Drawing.Size(507, 25)
+        Me.txtPassword.Size = New System.Drawing.Size(507, 27)
         Me.txtPassword.TabIndex = 1
         Me.txtPassword.Text = "76yy"
         '
         'txtUsernameSQL
         '
-        Me.txtUsernameSQL.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.txtUsernameSQL.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtUsernameSQL.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtUsernameSQL.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUsernameSQL.Font = New System.Drawing.Font("Arial", 13.8!)
         Me.txtUsernameSQL.Location = New System.Drawing.Point(410, 129)
         Me.txtUsernameSQL.Name = "txtUsernameSQL"
         Me.txtUsernameSQL.Size = New System.Drawing.Size(507, 27)
@@ -92,9 +96,9 @@ Partial Class Settings
         '
         'txtdatabaseName
         '
-        Me.txtdatabaseName.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.txtdatabaseName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtdatabaseName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtdatabaseName.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtdatabaseName.Font = New System.Drawing.Font("Arial", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtdatabaseName.Location = New System.Drawing.Point(410, 76)
         Me.txtdatabaseName.Name = "txtdatabaseName"
         Me.txtdatabaseName.Size = New System.Drawing.Size(507, 27)
@@ -148,12 +152,15 @@ Partial Class Settings
         '
         'btnSavesettings
         '
-        Me.btnSavesettings.Location = New System.Drawing.Point(759, 299)
+        Me.btnSavesettings.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnSavesettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSavesettings.ForeColor = System.Drawing.Color.Black
+        Me.btnSavesettings.Location = New System.Drawing.Point(842, 379)
         Me.btnSavesettings.Name = "btnSavesettings"
-        Me.btnSavesettings.Size = New System.Drawing.Size(75, 23)
+        Me.btnSavesettings.Size = New System.Drawing.Size(75, 33)
         Me.btnSavesettings.TabIndex = 9
         Me.btnSavesettings.Text = "Save"
-        Me.btnSavesettings.UseVisualStyleBackColor = True
+        Me.btnSavesettings.UseVisualStyleBackColor = False
         '
         'btnNewConnectionSettings
         '
@@ -171,41 +178,73 @@ Partial Class Settings
         '
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 518)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 538)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1073, 25)
+        Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode
+        Me.StatusStrip1.Size = New System.Drawing.Size(1073, 26)
         Me.StatusStrip1.TabIndex = 11
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(153, 20)
-        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(316, 20)
+        Me.ToolStripStatusLabel1.Text = "© 2024 MOSAKA LIMITED All Rights Reserved."
         '
         'ToolStripStatusLabel2
         '
         Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(153, 20)
-        Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(1969, 20)
+        Me.ToolStripStatusLabel2.Text = resources.GetString("ToolStripStatusLabel2.Text")
         '
         'btnUsersTable
         '
-        Me.btnUsersTable.Location = New System.Drawing.Point(856, 299)
+        Me.btnUsersTable.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnUsersTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUsersTable.ForeColor = System.Drawing.Color.Black
+        Me.btnUsersTable.Location = New System.Drawing.Point(740, 290)
         Me.btnUsersTable.Name = "btnUsersTable"
-        Me.btnUsersTable.Size = New System.Drawing.Size(78, 23)
+        Me.btnUsersTable.Size = New System.Drawing.Size(80, 33)
         Me.btnUsersTable.TabIndex = 12
-        Me.btnUsersTable.Text = "Set UP DB"
-        Me.btnUsersTable.UseVisualStyleBackColor = True
+        Me.btnUsersTable.Text = "Setup DB"
+        Me.btnUsersTable.UseVisualStyleBackColor = False
+        '
+        'txtRefreshtimer
+        '
+        Me.txtRefreshtimer.Location = New System.Drawing.Point(360, 355)
+        Me.txtRefreshtimer.Name = "txtRefreshtimer"
+        Me.txtRefreshtimer.Size = New System.Drawing.Size(100, 22)
+        Me.txtRefreshtimer.TabIndex = 13
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(257, 361)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(97, 16)
+        Me.Label4.TabIndex = 14
+        Me.Label4.Text = "RefreshTime"
+        '
+        'CheckRefeshTimer
+        '
+        Me.CheckRefeshTimer.AutoSize = True
+        Me.CheckRefeshTimer.Location = New System.Drawing.Point(467, 361)
+        Me.CheckRefeshTimer.Name = "CheckRefeshTimer"
+        Me.CheckRefeshTimer.Size = New System.Drawing.Size(74, 20)
+        Me.CheckRefeshTimer.TabIndex = 15
+        Me.CheckRefeshTimer.Text = "Active"
+        Me.CheckRefeshTimer.UseVisualStyleBackColor = True
         '
         'Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.ClientSize = New System.Drawing.Size(1073, 543)
+        Me.ClientSize = New System.Drawing.Size(1073, 564)
+        Me.Controls.Add(Me.CheckRefeshTimer)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.txtRefreshtimer)
         Me.Controls.Add(Me.btnUsersTable)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.btnNewConnectionSettings)
@@ -247,4 +286,7 @@ Partial Class Settings
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
     Friend WithEvents btnUsersTable As Button
+    Friend WithEvents txtRefreshtimer As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents CheckRefeshTimer As CheckBox
 End Class

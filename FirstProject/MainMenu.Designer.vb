@@ -52,11 +52,15 @@ Partial Class MainMenu
         Me.btnCreatedabase = New System.Windows.Forms.Button()
         Me.lblCreatedatabase = New System.Windows.Forms.Label()
         Me.txtDabasenameSHOW = New System.Windows.Forms.TextBox()
-        Me.txtNumberofRow = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnRefreshgrid = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.btnDataType = New System.Windows.Forms.Button()
+        Me.txtNumberofRow = New System.Windows.Forms.TextBox()
+        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.lblTimer = New System.Windows.Forms.Label()
+        Me.btnCustumCodeSQL = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -65,7 +69,7 @@ Partial Class MainMenu
         Me.btnCreatletable.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnCreatletable.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCreatletable.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCreatletable.Location = New System.Drawing.Point(13, 730)
+        Me.btnCreatletable.Location = New System.Drawing.Point(13, 1000)
         Me.btnCreatletable.Name = "btnCreatletable"
         Me.btnCreatletable.Size = New System.Drawing.Size(104, 64)
         Me.btnCreatletable.TabIndex = 0
@@ -77,7 +81,7 @@ Partial Class MainMenu
         Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnClose.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnClose.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClose.Location = New System.Drawing.Point(1507, 3)
+        Me.btnClose.Location = New System.Drawing.Point(1841, 8)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(45, 26)
         Me.btnClose.TabIndex = 8
@@ -97,11 +101,13 @@ Partial Class MainMenu
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridView1.ColumnHeadersHeight = 29
         Me.DataGridView1.EnableHeadersVisualStyles = False
         Me.DataGridView1.GridColor = System.Drawing.Color.DimGray
-        Me.DataGridView1.Location = New System.Drawing.Point(351, 95)
+        Me.DataGridView1.Location = New System.Drawing.Point(396, 93)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersVisible = False
+        Me.DataGridView1.RowHeadersWidth = 51
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Arial", 9.0!)
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
@@ -109,7 +115,7 @@ Partial Class MainMenu
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         Me.DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView1.RowTemplate.Height = 30
-        Me.DataGridView1.Size = New System.Drawing.Size(1150, 464)
+        Me.DataGridView1.Size = New System.Drawing.Size(1452, 693)
         Me.DataGridView1.TabIndex = 0
         '
         'cmbTables
@@ -130,7 +136,7 @@ Partial Class MainMenu
         '
         Me.btnShowtable.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnShowtable.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnShowtable.Location = New System.Drawing.Point(42, 312)
+        Me.btnShowtable.Location = New System.Drawing.Point(39, 312)
         Me.btnShowtable.Name = "btnShowtable"
         Me.btnShowtable.Size = New System.Drawing.Size(75, 23)
         Me.btnShowtable.TabIndex = 11
@@ -142,7 +148,7 @@ Partial Class MainMenu
         Me.btnExportData.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnExportData.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnExportData.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExportData.Location = New System.Drawing.Point(15, 672)
+        Me.btnExportData.Location = New System.Drawing.Point(15, 942)
         Me.btnExportData.Name = "btnExportData"
         Me.btnExportData.Size = New System.Drawing.Size(102, 52)
         Me.btnExportData.TabIndex = 12
@@ -153,7 +159,7 @@ Partial Class MainMenu
         '
         Me.ProgressBar1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.ProgressBar1.ForeColor = System.Drawing.Color.Gray
-        Me.ProgressBar1.Location = New System.Drawing.Point(254, 771)
+        Me.ProgressBar1.Location = New System.Drawing.Point(254, 1041)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(216, 23)
         Me.ProgressBar1.TabIndex = 14
@@ -227,7 +233,7 @@ Partial Class MainMenu
         '
         Me.txtShowmecode.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.txtShowmecode.ForeColor = System.Drawing.Color.White
-        Me.txtShowmecode.Location = New System.Drawing.Point(1, 3)
+        Me.txtShowmecode.Location = New System.Drawing.Point(31, 3)
         Me.txtShowmecode.Multiline = True
         Me.txtShowmecode.Name = "txtShowmecode"
         Me.txtShowmecode.Size = New System.Drawing.Size(307, 61)
@@ -237,7 +243,7 @@ Partial Class MainMenu
         '
         Me.txtSQLtablename.BackColor = System.Drawing.Color.Gray
         Me.txtSQLtablename.Font = New System.Drawing.Font("Arial", 12.0!)
-        Me.txtSQLtablename.Location = New System.Drawing.Point(123, 723)
+        Me.txtSQLtablename.Location = New System.Drawing.Point(123, 993)
         Me.txtSQLtablename.Name = "txtSQLtablename"
         Me.txtSQLtablename.Size = New System.Drawing.Size(231, 30)
         Me.txtSQLtablename.TabIndex = 22
@@ -247,7 +253,7 @@ Partial Class MainMenu
         Me.btnImport.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnImport.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImport.Location = New System.Drawing.Point(123, 759)
+        Me.btnImport.Location = New System.Drawing.Point(123, 1029)
         Me.btnImport.Name = "btnImport"
         Me.btnImport.Size = New System.Drawing.Size(125, 35)
         Me.btnImport.TabIndex = 23
@@ -259,7 +265,7 @@ Partial Class MainMenu
         Me.txtNewSQLTable.AutoSize = True
         Me.txtNewSQLTable.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Bold)
         Me.txtNewSQLTable.ForeColor = System.Drawing.Color.Yellow
-        Me.txtNewSQLTable.Location = New System.Drawing.Point(123, 701)
+        Me.txtNewSQLTable.Location = New System.Drawing.Point(123, 971)
         Me.txtNewSQLTable.Name = "txtNewSQLTable"
         Me.txtNewSQLTable.Size = New System.Drawing.Size(105, 19)
         Me.txtNewSQLTable.TabIndex = 24
@@ -281,7 +287,7 @@ Partial Class MainMenu
         '
         Me.btnLogOut.BackColor = System.Drawing.Color.Yellow
         Me.btnLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnLogOut.Location = New System.Drawing.Point(1366, 3)
+        Me.btnLogOut.Location = New System.Drawing.Point(1700, 8)
         Me.btnLogOut.Name = "btnLogOut"
         Me.btnLogOut.Size = New System.Drawing.Size(79, 33)
         Me.btnLogOut.TabIndex = 26
@@ -293,7 +299,7 @@ Partial Class MainMenu
         Me.cmbSELECTsheet.BackColor = System.Drawing.Color.Gray
         Me.cmbSELECTsheet.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Bold)
         Me.cmbSELECTsheet.FormattingEnabled = True
-        Me.cmbSELECTsheet.Location = New System.Drawing.Point(123, 672)
+        Me.cmbSELECTsheet.Location = New System.Drawing.Point(123, 942)
         Me.cmbSELECTsheet.Name = "cmbSELECTsheet"
         Me.cmbSELECTsheet.Size = New System.Drawing.Size(231, 27)
         Me.cmbSELECTsheet.TabIndex = 27
@@ -303,7 +309,7 @@ Partial Class MainMenu
         Me.lblSELECTWORKSHEET.AutoSize = True
         Me.lblSELECTWORKSHEET.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Bold)
         Me.lblSELECTWORKSHEET.ForeColor = System.Drawing.Color.Yellow
-        Me.lblSELECTWORKSHEET.Location = New System.Drawing.Point(120, 652)
+        Me.lblSELECTWORKSHEET.Location = New System.Drawing.Point(120, 922)
         Me.lblSELECTWORKSHEET.Name = "lblSELECTWORKSHEET"
         Me.lblSELECTWORKSHEET.Size = New System.Drawing.Size(150, 19)
         Me.lblSELECTWORKSHEET.TabIndex = 28
@@ -324,7 +330,7 @@ Partial Class MainMenu
         'txtdatabasename
         '
         Me.txtdatabasename.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Bold)
-        Me.txtdatabasename.Location = New System.Drawing.Point(121, 583)
+        Me.txtdatabasename.Location = New System.Drawing.Point(121, 853)
         Me.txtdatabasename.Name = "txtdatabasename"
         Me.txtdatabasename.Size = New System.Drawing.Size(227, 27)
         Me.txtdatabasename.TabIndex = 30
@@ -335,7 +341,7 @@ Partial Class MainMenu
         Me.btnCreatedabase.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCreatedabase.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCreatedabase.ForeColor = System.Drawing.Color.Black
-        Me.btnCreatedabase.Location = New System.Drawing.Point(127, 616)
+        Me.btnCreatedabase.Location = New System.Drawing.Point(127, 886)
         Me.btnCreatedabase.Name = "btnCreatedabase"
         Me.btnCreatedabase.Size = New System.Drawing.Size(75, 33)
         Me.btnCreatedabase.TabIndex = 31
@@ -347,7 +353,7 @@ Partial Class MainMenu
         Me.lblCreatedatabase.AutoSize = True
         Me.lblCreatedatabase.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Bold)
         Me.lblCreatedatabase.ForeColor = System.Drawing.Color.Yellow
-        Me.lblCreatedatabase.Location = New System.Drawing.Point(121, 563)
+        Me.lblCreatedatabase.Location = New System.Drawing.Point(121, 833)
         Me.lblCreatedatabase.Name = "lblCreatedatabase"
         Me.lblCreatedatabase.Size = New System.Drawing.Size(131, 19)
         Me.lblCreatedatabase.TabIndex = 32
@@ -359,20 +365,10 @@ Partial Class MainMenu
         Me.txtDabasenameSHOW.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtDabasenameSHOW.Font = New System.Drawing.Font("Arial", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDabasenameSHOW.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.txtDabasenameSHOW.Location = New System.Drawing.Point(1396, 722)
+        Me.txtDabasenameSHOW.Location = New System.Drawing.Point(968, 1049)
         Me.txtDabasenameSHOW.Name = "txtDabasenameSHOW"
         Me.txtDabasenameSHOW.Size = New System.Drawing.Size(166, 15)
         Me.txtDabasenameSHOW.TabIndex = 33
-        '
-        'txtNumberofRow
-        '
-        Me.txtNumberofRow.AcceptsReturn = True
-        Me.txtNumberofRow.BackColor = System.Drawing.Color.Gray
-        Me.txtNumberofRow.Font = New System.Drawing.Font("Arial", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNumberofRow.Location = New System.Drawing.Point(177, 183)
-        Me.txtNumberofRow.Name = "txtNumberofRow"
-        Me.txtNumberofRow.Size = New System.Drawing.Size(131, 22)
-        Me.txtNumberofRow.TabIndex = 34
         '
         'Label2
         '
@@ -401,36 +397,88 @@ Partial Class MainMenu
         '
         'Timer1
         '
-        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
         '
         'btnDataType
         '
         Me.btnDataType.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnDataType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDataType.ForeColor = System.Drawing.Color.Black
-        Me.btnDataType.Location = New System.Drawing.Point(1411, 652)
+        Me.btnDataType.Location = New System.Drawing.Point(1681, 922)
         Me.btnDataType.Name = "btnDataType"
         Me.btnDataType.Size = New System.Drawing.Size(79, 30)
         Me.btnDataType.TabIndex = 37
         Me.btnDataType.Text = "Import"
         Me.btnDataType.UseVisualStyleBackColor = False
         '
+        'txtNumberofRow
+        '
+        Me.txtNumberofRow.Location = New System.Drawing.Point(180, 180)
+        Me.txtNumberofRow.Name = "txtNumberofRow"
+        Me.txtNumberofRow.Size = New System.Drawing.Size(100, 22)
+        Me.txtNumberofRow.TabIndex = 38
+        '
+        'PrintPreviewDialog1
+        '
+        Me.PrintPreviewDialog1.AutoScrollMargin = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog1.AutoScrollMinSize = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog1.ClientSize = New System.Drawing.Size(400, 300)
+        Me.PrintPreviewDialog1.Enabled = True
+        Me.PrintPreviewDialog1.Icon = CType(resources.GetObject("PrintPreviewDialog1.Icon"), System.Drawing.Icon)
+        Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
+        Me.PrintPreviewDialog1.Visible = False
+        '
+        'lblTimer
+        '
+        Me.lblTimer.AutoSize = True
+        Me.lblTimer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblTimer.ForeColor = System.Drawing.Color.LawnGreen
+        Me.lblTimer.Location = New System.Drawing.Point(39, 338)
+        Me.lblTimer.Name = "lblTimer"
+        Me.lblTimer.Size = New System.Drawing.Size(46, 19)
+        Me.lblTimer.TabIndex = 39
+        Me.lblTimer.Text = "Timer"
+        '
+        'btnCustumCodeSQL
+        '
+        Me.btnCustumCodeSQL.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnCustumCodeSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCustumCodeSQL.Location = New System.Drawing.Point(344, 34)
+        Me.btnCustumCodeSQL.Name = "btnCustumCodeSQL"
+        Me.btnCustumCodeSQL.Size = New System.Drawing.Size(75, 30)
+        Me.btnCustumCodeSQL.TabIndex = 40
+        Me.btnCustumCodeSQL.Text = "Run"
+        Me.btnCustumCodeSQL.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Location = New System.Drawing.Point(1635, 8)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(59, 56)
+        Me.Button2.TabIndex = 41
+        Me.Button2.UseVisualStyleBackColor = False
+        '
         'MainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.ClientSize = New System.Drawing.Size(1615, 810)
+        Me.ClientSize = New System.Drawing.Size(1920, 1080)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnCustumCodeSQL)
+        Me.Controls.Add(Me.lblTimer)
+        Me.Controls.Add(Me.txtNumberofRow)
         Me.Controls.Add(Me.btnDataType)
         Me.Controls.Add(Me.btnRefreshgrid)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.txtNumberofRow)
         Me.Controls.Add(Me.txtDabasenameSHOW)
         Me.Controls.Add(Me.lblCreatedatabase)
         Me.Controls.Add(Me.btnCreatedabase)
         Me.Controls.Add(Me.txtdatabasename)
-        Me.Controls.Add(Me.btnCreatedatabase)
         Me.Controls.Add(Me.lblSELECTWORKSHEET)
         Me.Controls.Add(Me.cmbSELECTsheet)
         Me.Controls.Add(Me.btnLogOut)
@@ -449,13 +497,12 @@ Partial Class MainMenu
         Me.Controls.Add(Me.btnExportData)
         Me.Controls.Add(Me.btnShowtable)
         Me.Controls.Add(Me.cmbTables)
-        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnCreatletable)
+        Me.Controls.Add(Me.DataGridView1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "MainMenu"
-        Me.Text = "MainMenu"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -484,7 +531,6 @@ Partial Class MainMenu
     Friend WithEvents btnCreatedabase As Button
     Friend WithEvents lblCreatedatabase As Label
     Friend WithEvents txtDabasenameSHOW As TextBox
-    Friend WithEvents txtNumberofRow As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents btnRefreshgrid As Button
     Public WithEvents Timer1 As Timer
@@ -493,4 +539,9 @@ Partial Class MainMenu
     Friend WithEvents btnDataType As Button
     Public WithEvents txtWhereConditiontext As TextBox
     Public WithEvents txtSQLtablename As TextBox
+    Friend WithEvents txtNumberofRow As TextBox
+    Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
+    Friend WithEvents lblTimer As Label
+    Friend WithEvents btnCustumCodeSQL As Button
+    Friend WithEvents Button2 As Button
 End Class
