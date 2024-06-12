@@ -4,6 +4,6 @@
     <add key="DataSource" value="SCHOEDINGER\SQLEXPRESS" />
     <add key="Username" value="Mosaka85" />
     <add key="Password" value="MiaraBlueM0$@K@85!" />
-    <add key="InitialCatalog" value="TL_Peppadew" />
+    <add key="InitialCatalog" value="NN" />
   </appSettings>
 </configuration>
